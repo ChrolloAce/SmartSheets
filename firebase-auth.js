@@ -84,12 +84,18 @@ export const handleSignOut = async () => {
   }
 };
 
-// Check if user is authenticated and redirect if not
+// Check if user is authenticated without automatic redirection
 export const checkAuth = () => {
   const user = auth.currentUser;
-  if (!user) {
-    window.location.href = 'login.html';
-    return false;
-  }
-  return true;
+  return user !== null;
+};
+
+// Safer way to get auth state with a promise
+export const getAuthState = () => {
+  return new Promise((resolve) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      unsubscribe();
+      resolve(user);
+    });
+  });
 }; 

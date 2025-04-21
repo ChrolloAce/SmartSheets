@@ -549,24 +549,25 @@
 
     <script type="module">
         // Import Firebase authentication functions
-        import { checkAuth, handleSignOut } from './firebase-auth.js';
+        import { getAuthState, handleSignOut } from './firebase-auth.js';
         
         // Check if user is authenticated
         document.addEventListener('DOMContentLoaded', async () => {
-            // If not authenticated, redirect to login
-            const isAuthenticated = checkAuth();
-            
-            if (isAuthenticated) {
-                // Get current user information
-                const auth = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js')
-                    .then(module => module.getAuth());
-                
-                const user = auth.currentUser;
+            try {
+                // Get current authentication state
+                const user = await getAuthState();
                 
                 if (user) {
-                    // Update UI with user information
+                    // User is authenticated, update UI
                     updateUserInfo(user);
+                } else {
+                    // Not authenticated, redirect to login
+                    window.location.href = 'login.html';
                 }
+            } catch (error) {
+                console.error('Auth state error:', error);
+                // If there's an error, redirect to login
+                window.location.href = 'login.html';
             }
         });
         

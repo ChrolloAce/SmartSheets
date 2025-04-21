@@ -382,7 +382,7 @@
             signInWithEmail, 
             signInWithGoogle, 
             signUpWithEmail, 
-            checkAuthState 
+            getAuthState 
         } from './firebase-auth.js';
 
         // DOM elements
@@ -395,10 +395,15 @@
         const passwordInput = document.getElementById('password');
 
         // Check if user is already logged in
-        checkAuthState((user) => {
-            if (user) {
-                // User is signed in, redirect to dashboard
-                window.location.href = 'dashboard.html';
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const user = await getAuthState();
+                if (user) {
+                    // User is signed in, redirect to dashboard
+                    window.location.href = 'dashboard.html';
+                }
+            } catch (error) {
+                console.error('Auth state error:', error);
             }
         });
 
@@ -447,11 +452,17 @@
                         window.location.href = 'dashboard.html';
                     }, 1000);
                 } else {
-                    // Show error message
-                    showAlert(result.error, 'error');
+                    // Check for specific error messages
+                    if (result.error.includes('auth/unauthorized-domain')) {
+                        showAlert('This domain is not authorized in Firebase. Please add it in the Firebase Console under Authentication > Settings > Authorized domains.', 'error');
+                    } else {
+                        // Show other error messages
+                        showAlert(result.error, 'error');
+                    }
                 }
             } catch (error) {
-                showAlert('An unexpected error occurred.', 'error');
+                showAlert('An unexpected error occurred during Google sign-in.', 'error');
+                console.error('Google sign-in error:', error);
             }
         });
 
