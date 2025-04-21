@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Genius Sheets</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .login-container {
+            max-width: 450px;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            background: #fff;
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .login-header h1 {
+            font-size: 28px;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+        
+        .login-header p {
+            color: var(--text-light);
+            font-size: 16px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e1e1e1;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        
+        .form-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+        
+        .remember-me input {
+            margin-right: 8px;
+        }
+        
+        .forgot-password {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .login-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .login-divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+        }
+        
+        .login-divider::before,
+        .login-divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #e1e1e1;
+        }
+        
+        .login-divider span {
+            padding: 0 15px;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+        
+        .google-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 14px;
+            background: white;
+            color: var(--text-dark);
+            border: 1px solid #e1e1e1;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .google-btn:hover {
+            background-color: #f8f8f8;
+        }
+        
+        .google-btn img {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+        }
+        
+        .signup-link {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        
+        .signup-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .alert {
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            display: none;
+        }
+        
+        .alert-error {
+            background-color: #fee2e2;
+            color: #ef4444;
+            border: 1px solid #fecaca;
+        }
+        
+        .alert-success {
+            background-color: #dcfce7;
+            color: #16a34a;
+            border: 1px solid #bbf7d0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header and Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <a href="index.html">
+                        <div class="text-logo">
+                            <span class="logo-icon">◆</span>
+                            <span class="logo-text">Genius Sheets</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="nav-links">
+                    <div class="dropdown">
+                        <a href="#" class="nav-link">Product</a>
+                        <div class="dropdown-content">
+                            <a href="#">Platform</a>
+                            <a href="#">Solutions</a>
+                            <a href="#">Features</a>
+                            <a href="#">Integrations</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <a href="#" class="nav-link">Solutions</a>
+                        <div class="dropdown-content">
+                            <a href="#">Project Management</a>
+                            <a href="#">Marketing Management</a>
+                            <a href="#">IT Portfolio</a>
+                            <a href="#">Services Delivery</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <a href="#" class="nav-link">Resources</a>
+                        <div class="dropdown-content">
+                            <a href="#">Help Center</a>
+                            <a href="#">Training</a>
+                            <a href="#">Community</a>
+                            <a href="#">Support</a>
+                        </div>
+                    </div>
+                    <a href="pricing.html" class="nav-link">Pricing</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </div>
+                <div class="nav-buttons">
+                    <a href="#" class="btn btn-secondary">Watch a demo</a>
+                    <a href="#" class="btn btn-primary">Try Genius Sheets for free</a>
+                    <div class="icon-buttons">
+                        <a href="#" class="globe-icon"><i class="fas fa-globe"></i></a>
+                        <a href="#" class="search-icon"><i class="fas fa-search"></i></a>
+                        <a href="login.html" class="login-link">Log in</a>
+                    </div>
+                </div>
+                <div class="nav-toggle" id="navToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="mobile-menu" id="mobileMenu">
+                    <a href="#" class="nav-link">Product</a>
+                    <a href="#" class="nav-link">Solutions</a>
+                    <a href="#" class="nav-link">Resources</a>
+                    <a href="pricing.html" class="nav-link">Pricing</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                    <a href="#" class="btn btn-secondary mobile-btn">Watch a demo</a>
+                    <a href="#" class="btn btn-primary mobile-btn">Try Genius Sheets for free</a>
+                    <a href="login.html" class="login-link">Log in</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Login Section -->
+    <section class="login-section">
+        <div class="container">
+            <div class="login-container">
+                <div class="login-header">
+                    <h1>Welcome Back</h1>
+                    <p>Log in to access your dashboard</p>
+                </div>
+                
+                <div id="alertMessage" class="alert"></div>
+                
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" required placeholder="you@example.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" required placeholder="Enter your password">
+                    </div>
+                    
+                    <div class="form-footer">
+                        <div class="remember-me">
+                            <input type="checkbox" id="remember">
+                            <label for="remember">Remember me</label>
+                        </div>
+                        <a href="#" class="forgot-password">Forgot password?</a>
+                    </div>
+                    
+                    <button type="submit" class="login-btn" id="loginBtn">Log In</button>
+                </form>
+                
+                <div class="login-divider">
+                    <span>OR</span>
+                </div>
+                
+                <button class="google-btn" id="googleBtn">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=" alt="Google logo">
+                    Continue with Google
+                </button>
+                
+                <div class="signup-link">
+                    Don't have an account? <a href="#" id="signupToggle">Sign up</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-logo">
+                    <div class="text-logo text-logo-footer">
+                        <span class="logo-icon">◆</span>
+                        <span class="logo-text">Genius Sheets</span>
+                    </div>
+                    <p>Work management that adapts to your needs</p>
+                </div>
+                <div class="footer-nav">
+                    <div class="footer-column">
+                        <h3>Product</h3>
+                        <ul>
+                            <li><a href="#">Platform</a></li>
+                            <li><a href="#">Solutions</a></li>
+                            <li><a href="#">Features</a></li>
+                            <li><a href="#">Integrations</a></li>
+                            <li><a href="#">Pricing & plans</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Resources</h3>
+                        <ul>
+                            <li><a href="#">Content Center</a></li>
+                            <li><a href="#">Product insights</a></li>
+                            <li><a href="#">Help and Learning</a></li>
+                            <li><a href="#">University</a></li>
+                            <li><a href="#">Support</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Company</h3>
+                        <ul>
+                            <li><a href="#">About us</a></li>
+                            <li><a href="#">Leadership</a></li>
+                            <li><a href="#">Newsroom</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="contact.html">Contact us</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Learn</h3>
+                        <ul>
+                            <li><a href="#">Project management templates</a></li>
+                            <li><a href="#">Dashboard gallery</a></li>
+                            <li><a href="#">Getting started with the API</a></li>
+                            <li><a href="#">Formulas to look up data</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2023 Genius Sheets Inc. All Rights Reserved | <a href="#">Privacy</a> | <a href="#">Cookie Preferences</a></p>
+                </div>
+                <div class="app-links">
+                    <a href="#" class="app-store">Download on the App Store</a>
+                    <a href="#" class="play-store">Get it on Google Play</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        // Import Firebase authentication functions
+        import { 
+            signInWithEmail, 
+            signInWithGoogle, 
+            signUpWithEmail, 
+            checkAuthState 
+        } from './firebase-auth.js';
+
+        // DOM elements
+        const loginForm = document.getElementById('loginForm');
+        const loginBtn = document.getElementById('loginBtn');
+        const googleBtn = document.getElementById('googleBtn');
+        const signupToggle = document.getElementById('signupToggle');
+        const alertMessage = document.getElementById('alertMessage');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+
+        // Check if user is already logged in
+        checkAuthState((user) => {
+            if (user) {
+                // User is signed in, redirect to dashboard
+                window.location.href = 'dashboard.html';
+            }
+        });
+
+        // Handle login form submission
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = emailInput.value;
+            const password = passwordInput.value;
+            
+            // Disable login button during authentication
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'Logging in...';
+            
+            try {
+                const result = await signInWithEmail(email, password);
+                
+                if (result.success) {
+                    // Sign-in successful
+                    showAlert('Login successful! Redirecting...', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 1000);
+                } else {
+                    // Show error message
+                    showAlert(result.error, 'error');
+                    loginBtn.disabled = false;
+                    loginBtn.textContent = 'Log In';
+                }
+            } catch (error) {
+                showAlert('An unexpected error occurred.', 'error');
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'Log In';
+            }
+        });
+
+        // Handle Google sign-in
+        googleBtn.addEventListener('click', async () => {
+            try {
+                const result = await signInWithGoogle();
+                
+                if (result.success) {
+                    // Sign-in successful
+                    showAlert('Login successful! Redirecting...', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 1000);
+                } else {
+                    // Show error message
+                    showAlert(result.error, 'error');
+                }
+            } catch (error) {
+                showAlert('An unexpected error occurred.', 'error');
+            }
+        });
+
+        // Toggle between sign in and sign up
+        let isSignup = false;
+        signupToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            isSignup = !isSignup;
+            
+            if (isSignup) {
+                document.querySelector('.login-header h1').textContent = 'Create an Account';
+                document.querySelector('.login-header p').textContent = 'Sign up to get started';
+                loginBtn.textContent = 'Sign Up';
+                signupToggle.textContent = 'Log in';
+                document.querySelector('.signup-link').innerHTML = 'Already have an account? <a href="#" id="signupToggle">Log in</a>';
+            } else {
+                document.querySelector('.login-header h1').textContent = 'Welcome Back';
+                document.querySelector('.login-header p').textContent = 'Log in to access your dashboard';
+                loginBtn.textContent = 'Log In';
+                signupToggle.textContent = 'Sign up';
+                document.querySelector('.signup-link').innerHTML = 'Don\'t have an account? <a href="#" id="signupToggle">Sign up</a>';
+            }
+            
+            // Update event listener for the new signupToggle element
+            document.getElementById('signupToggle').addEventListener('click', (e) => {
+                e.preventDefault();
+                isSignup = !isSignup;
+                
+                if (isSignup) {
+                    document.querySelector('.login-header h1').textContent = 'Create an Account';
+                    document.querySelector('.login-header p').textContent = 'Sign up to get started';
+                    loginBtn.textContent = 'Sign Up';
+                    signupToggle.textContent = 'Log in';
+                    document.querySelector('.signup-link').innerHTML = 'Already have an account? <a href="#" id="signupToggle">Log in</a>';
+                } else {
+                    document.querySelector('.login-header h1').textContent = 'Welcome Back';
+                    document.querySelector('.login-header p').textContent = 'Log in to access your dashboard';
+                    loginBtn.textContent = 'Log In';
+                    signupToggle.textContent = 'Sign up';
+                    document.querySelector('.signup-link').innerHTML = 'Don\'t have an account? <a href="#" id="signupToggle">Sign up</a>';
+                }
+            });
+        });
+
+        // Form submission logic updated for signup/login toggle
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = emailInput.value;
+            const password = passwordInput.value;
+            
+            // Disable button during authentication
+            loginBtn.disabled = true;
+            loginBtn.textContent = isSignup ? 'Signing up...' : 'Logging in...';
+            
+            try {
+                let result;
+                
+                if (isSignup) {
+                    // Handle sign up
+                    result = await signUpWithEmail(email, password);
+                } else {
+                    // Handle log in
+                    result = await signInWithEmail(email, password);
+                }
+                
+                if (result.success) {
+                    // Authentication successful
+                    showAlert(isSignup ? 'Account created successfully! Redirecting...' : 'Login successful! Redirecting...', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 1000);
+                } else {
+                    // Show error message
+                    showAlert(result.error, 'error');
+                    loginBtn.disabled = false;
+                    loginBtn.textContent = isSignup ? 'Sign Up' : 'Log In';
+                }
+            } catch (error) {
+                showAlert('An unexpected error occurred.', 'error');
+                loginBtn.disabled = false;
+                loginBtn.textContent = isSignup ? 'Sign Up' : 'Log In';
+            }
+        });
+
+        // Helper function to show alert messages
+        function showAlert(message, type) {
+            alertMessage.textContent = message;
+            alertMessage.className = 'alert';
+            alertMessage.classList.add(`alert-${type}`);
+            alertMessage.style.display = 'block';
+            
+            setTimeout(() => {
+                alertMessage.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+    
+    <script src="script.js"></script>
+</body>
+</html> 
